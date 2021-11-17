@@ -1,0 +1,46 @@
+= TEAM =
+
+[Please include affiliation and name of first author]
+Luke Stringer: The University Of Sheffield
+Sam Oakley: The University Of Sheffield
+Sam Biggins: The University Of Sheffield
+Shaabi Mohammed: The University Of Sheffield
+
+= DESCRIPTION OF RUN =
+
+[Please include a short paragraph describing your method for the run]
+For the test data from corpora which we have training data for (MSRpar, MSRVid, SMTeuroparl), we use a machine learning approach as follows:
+  We preprocess the data by removing words contained in our stopwords list and then stem the remaining words. 
+  From the sentence word tokens we generate ngrams for each of the sentences. These sentences are then compared to produce a set of scores. These scores/features are then passed to a linear regression machine learning algorithm in order to build a model.
+
+For the surprise data from corpora which we have no training data for (OnWN, SMTnews), we use a vector space approach as follows:
+  Stop list words are first removed. The two sets of words from each sentence are then combined to form a vector. For each word in the set of all words, we check to see if that word exists in each sentence - if it does, that position in the vector is set to 1; else, 0. After this initial computation, word pairs with a similarity of 0 are re-evaluated to find a more accurate similarity by finding the distance between their respective word sysnets using WordNet. 
+  A vector for each sentence is generated and then the similarity between each is calculated using the Cosine metric.
+
+
+= TOOLS USED =
+
+[Please keep those tools that you used, delete those you did not use, and add more lines if needed]
+
+* Word Sense Disambiguation
+* Knowledge-based similarity
+* Stemming 
+* Synonym substitution
+* Machine Learning - Linear Regression 
+* Ngram
+* Lemmatizer
+* Vector distance metrics
+
+
+= RESOURCES USED =
+
+[Please keep those resources that you used, delete those you did not use, and add more lines if needed]
+
+* WordNet
+
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+We use a simple switch statement when reading in the test data that choose the best approach (machine learning OR vector space) depending upon which corpora the data originates from.
+
+= COMMENTS =
+None

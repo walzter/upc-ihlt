@@ -1,0 +1,41 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+
+Department of Computer Science, University of Bari "Aldo Moro" (ITALY), Annalina Caputo
+
+= DESCRIPTION OF RUN =
+
+This run is based on distributional similarity computed relying on a WordSpace. 
+WordSpace is a vector space in which words are represented as mathematical points.
+In particular, the WordSpace is built using a technique based on Random Indexing and vectors permutation. 
+Permutation is used to encode syntactic dependencies between words in the WordSpace. 
+We adopt WaCkypedia_EN as corpus which contains full dependency parse performed by MaltParser.
+
+= TOOLS USED =
+
+* Distributional similarity
+
+= RESOURCES USED =
+
+* Monolingual corpora
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+The distributional similarity is based on vectors sum. 
+The meaning of a text is computed as the vector sum of all the words which occur in. 
+Then, each text is represented by a vector. 
+The similarity between two texts is defined as the cosine between their vector representation.
+
+= COMMENTS =
+
+

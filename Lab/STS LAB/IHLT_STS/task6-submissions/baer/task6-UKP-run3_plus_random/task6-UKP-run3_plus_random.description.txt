@@ -1,0 +1,43 @@
+========================
+
+= TEAM =
+
+Daniel Bär, UKP Lab, Technische Universität Darmstadt
+
+
+= DESCRIPTION OF RUN =
+
+This run extends run 2: We return for both surprise datasets random scores between 4.5 and 5.0. The remaining scores are equal to run 2.
+
+
+= TOOLS USED =
+
+* Part of speech tagger
+* Lemmatizer
+* Stopword filter
+* Distributional similarity
+* Knowledge-based similarity
+* String similarity
+* Textual Entailment
+
+
+= RESOURCES USED =
+
+* Monolingual corpora
+* WordNet
+* Wiktionary
+* Wikipedia
+* Distributional thesaurus
+* Statistical machine translation (MOSES on Europarl)
+* Textual entailment system
+* TWSI lexical substitution system
+
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+Our natural language processing framework is based on Apache UIMA. First, we computed the individual similarity scores with all the available text similarity measures in several configurations, resulting 300+ features. Besides measures on the lexical level, we used, for example, semantic similarity measures such as Explicit Semantic Analysis (on WordNet, Wiktionary, and Wikipedia) as well as aggregated word similarity measures on WordNet. We then used the linear regression machine learning classifier from the WEKA toolkit to combine these similarity features. During our experiments, we were able to cut the final feature set down to 21 distinct features (for this run).
+
+
+= COMMENTS =
+
+

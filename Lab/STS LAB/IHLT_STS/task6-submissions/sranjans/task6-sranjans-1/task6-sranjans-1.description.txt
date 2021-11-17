@@ -1,0 +1,44 @@
+= TEAM =
+
+[Please include affiliation and name of first author]
+
+Dr. Harish Karnick
+Professor,
+Computer Science and Engineering,
+IIT Kanpur,
+Kanpur
+
+= DESCRIPTION OF RUN =
+
+[Please include a short paragraph describing your method for the run]
+
+We use a "bag of words" approach to sentential similarity, where each sentence is broken down into word tokens, and the maximal bipartite match is found between two sentences. For word to word similarity, we use a statistical similarity measure (DISCO - www.linguatools.de/disco/disco_en.html) which uses Wikipedia as the corpus. The maximal bipartite match score is normalized by the larger sentence's token length. For the MSRvideo dataset, we use a combination of DISCO similarity and WordNet similarity.
+
+= TOOLS USED =
+
+[Please keep those tools that you used, delete those you did not use, and add more lines if needed]
+
+* Part of speech tagger
+* Lemmatizer
+* Word Sense Disambiguation
+* Distributional similarity
+* Knowledge-based similarity
+
+= RESOURCES USED =
+
+[Please keep those resources that you used, delete those you did not use, and add more lines if needed]
+
+* Monolingual corpora
+* WordNet
+* Wikipedia
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+[Please summarize the method to combine the tools and resources, mentioning whether it's heuristic, or uses machine learning, etc.]
+
+Every sentence is broken down into word tokens, which are then lemmatized. Sentence similarity is measured by finding the maximal bipartite match between the tokens of two sentences. Word to word similarity is measured by using a statistical similarity measure (DISCO - www.linguatools.de/disco/disco_en.html), which uses distributional similarity. For the MSRvideo dataset, a combination of DISCO and a Knowledge-based similarity measure (WordNet similarity - Lin similarity) is used. For the WordNet based similarity, a Word Sense Disambiguation algorithm is used (variant of Lesk Algorithm). The score is heuristic in nature.
+The system is completely unsupervised.
+
+= COMMENTS =
+
+[Please include any comment you might have to improve the task in the future]

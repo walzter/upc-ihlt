@@ -1,0 +1,38 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+
+Sergio Jimenez, Universidad Nacional de Colombia
+
+= DESCRIPTION OF RUN =
+
+Soft cardinality is a general method for object comparison that uses cardinality-based resemblance coefficients (e.g. Jaccard, Dice) and replaces the classical set cardinality function by a function that makes a soft counting of the elements in a set. We built different soft cardinality similarity functions with adjusted parameters using training datasets for each associated test dataset. A single similarity function for "surprise" datasets was adjusted using the three training datasets. Additionally, we used the generalized Monge-Elkan method to build a similarity function for SMTeuroparl dataset. 
+
+= TOOLS USED =
+
+
+* Lemmatizer (Porter's stemmer)
+* Knowledge-based similarity
+
+= RESOURCES USED =
+
+
+* A list of English stop words from http://anoncvs.postgresql.org/cvsweb.cgi/pgsql/src/backend/snowball/stopwords/
+
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+The Porter's stemmer and the list of stop words were used to preprocess sentences. Text similarity was computed using soft cardinality similarity functions. Parameters of those functions were adjusted manually to maximize Pearson correlation, on each dataset separately, with its gold standard. Each adjusted function was used with their corresponding test dataset to generate output for task evaluation.
+
+
+= COMMENTS =
+

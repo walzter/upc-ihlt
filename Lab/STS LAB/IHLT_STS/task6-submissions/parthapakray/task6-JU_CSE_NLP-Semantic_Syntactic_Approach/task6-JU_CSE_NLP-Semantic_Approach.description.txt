@@ -1,0 +1,46 @@
+
+
+========================
+
+= TEAM =
+Author Name : SNEHASIS NEOGI.
+Affiliation : JADAVPUR UNIVERSITY.
+
+
+= DESCRIPTION OF RUN =
+
+System parse the input files and recognize the tab separated lines.Both the lines are then parse using dependency parser.Then our system goes for wordnet based subj-subj,subj-verb, obj-obj,obj-verb,sub-obj and prep-prep comparision.Different scores (Between 0 and 5) are then allocated to each line depending on the nature of mapping i.e surface word matching or synset-synset matching.In syntactic module our system calculates N-gram values,word overlapes,Named Entity and different text similarity values.Some threshold are determined for each type of syntactic measures.Scores (Between 0 and 5) are allocated to each line that cross different threshold values.Final score is the avarage of these scores.
+
+
+= TOOLS USED =
+
+
+
+* Part of speech tagger
+* Lemmatizer
+* Multiword expressions recognition
+* Syntax parser
+* Named Entity recognition
+* Logical Inference
+* Textual Entailment
+* Dependency Parser
+* Coreference
+
+= RESOURCES USED =
+
+
+
+* WordNet
+* Repositories for named-entities and acronyms
+* Stop word dictionary
+* JavaRAP
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+Our System is based on different heuristics where semantic and syntactic measures are evaluated and scores are allocated to each line depending on the nature of semantic mapping or thresholds.
+
+
+
+= COMMENTS =
+
+Semantic measures can be done in a more specific way and implementation of Conceptual graph will be done in future. 

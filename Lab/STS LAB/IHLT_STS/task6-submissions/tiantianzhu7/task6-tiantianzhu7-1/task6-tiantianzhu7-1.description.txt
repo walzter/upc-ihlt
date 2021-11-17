@@ -1,0 +1,37 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+
+Zhu Tiantian 
+East China Normal University
+
+= DESCRIPTION OF RUN =
+
+we use a Knowledge-based similarity method to compute word similarity, and add WSD before computing word similarity. On the other hand, we consider word order as another feature. At last we add word similarity and word order similarity together with different weights.
+
+= TOOLS USED =
+
+* Part of speech tagger
+* Word Sense Disambiguation
+* Knowledge-based similarity
+
+= RESOURCES USED =
+
+* WordNet
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+we use WordNet to compute word similarity,it is based on the path length of two words and the deepth of their LCS.
+
+= COMMENTS =
+
+

@@ -1,0 +1,23 @@
+=======================
+
+= TEAM =
+
+BUAP, Benémerita Universidad Autónoma de Puebla
+
+= DESCRIPTION OF RUN = 
+BUAP, Maya Carrillo Ruiz
+
+= TOOLS USED = 
+The method uses Random Indexing to reduces the vector space dimension and Bag of Concepts to produce context vectors 
+* Lemmatizer
+
+= RESOURCES USED =
+ * NONE
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+The method uses  a stemmer, then builds context vectors for each term considering the documents where they appear, 
+afterwards it generate document vectors, adding the context vectors of their terms. 
+The  similarity is calculated with cosine
+
+= COMMENTS =
+

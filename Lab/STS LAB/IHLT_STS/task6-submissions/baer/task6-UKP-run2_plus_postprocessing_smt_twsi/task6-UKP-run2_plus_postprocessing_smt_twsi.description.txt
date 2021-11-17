@@ -1,0 +1,46 @@
+========================
+
+= TEAM =
+
+Daniel Bär, UKP Lab, Technische Universität Darmstadt
+
+
+= DESCRIPTION OF RUN =
+
+This run extends run 1:
+- We added an additional post-processing filter. It trims all texts down to [a-zA-Z0-9] vocabulary and compares them. If we find an exact match, we set the similarity score to 5.0, regardless of what the classifier output in the first place.
+- We included the TWSI lexical substitution system which was used to pre-process the input texts. On the substituted data, we then computed pairwise word similarities as in run 1.
+- We further employed a statistical machine translation system for this run. We translated the original input texts to three other languages (NL, ES, DE), then back to English. We concatenated all transformed texts and the original input text and computed pairwise word similarities as in run 1.
+
+
+= TOOLS USED =
+
+* Part of speech tagger
+* Lemmatizer
+* Stopword filter
+* Distributional similarity
+* Knowledge-based similarity
+* String similarity
+* Textual Entailment
+
+
+= RESOURCES USED =
+
+* Monolingual corpora
+* WordNet
+* Wiktionary
+* Wikipedia
+* Distributional thesaurus
+* Statistical machine translation (MOSES on Europarl)
+* Textual entailment system
+* TWSI lexical substitution system
+
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+Our natural language processing framework is based on Apache UIMA. First, we computed the individual similarity scores with all the available text similarity measures in several configurations, resulting 300+ features. Besides measures on the lexical level, we used, for example, semantic similarity measures such as Explicit Semantic Analysis (on WordNet, Wiktionary, and Wikipedia) as well as aggregated word similarity measures on WordNet. We then used the linear regression machine learning classifier from the WEKA toolkit to combine these similarity features. During our experiments, we were able to cut the final feature set down to 21 distinct features (for this run).
+
+
+= COMMENTS =
+
+

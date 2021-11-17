@@ -1,0 +1,43 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+
+The Hong Kong Polytechnic University
+Jian Xu
+
+= DESCRIPTION OF RUN =
+The method taken in this run mainly contains two parts: The first part merges the 
+two sentences into an enlonged vector and then formulates a semantic vector using
+the similarity values calcuated based on the wordnet and the relatedness scores
+from the English Wikipedia; The second part considers the structural knowledge 
+between words in the two sentences by constructing a word graph. In this graph,
+two words, continuous and non-continuous, will be linked if they fall within a 
+window span. The edge weight is computed by penalizing the span between words.
+The graph similarity is obtained based on the edge weight. Finally, the two
+parts are linearly combined.
+
+= TOOLS USED =
+
+* Part of speech tagger
+* Knowledge-based similarity
+
+= RESOURCES USED =
+
+* WordNet
+* Wikipedia
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+As our method contains two parts, in the first part, we compute similarity between two nouns or two verbs. Part of speech tagger and WordNet is used to handle similarity computation.  WordNet is used for similarity calcualtion and it is knowledge based. For Wikipedia, we use it to get the relatedness between two words.
+
+= COMMENTS =
+We would like to include machine learning approach to improve the task in the future work.

@@ -1,0 +1,41 @@
+= TEAM =
+
+[Please include affiliation and name of first author]
+Luke Stringer: The University Of Sheffield
+Sam Oakley: The University Of Sheffield
+Sam Biggins: The University Of Sheffield
+Shaabi Mohammed: The University Of Sheffield
+
+= DESCRIPTION OF RUN =
+
+[Please include a short paragraph describing your method for the run]
+
+We preprocess the data by removing words contained in our stopwords list and then stem the remaining words. 
+From the sentence word tokens we generate ngrams for each of the sentences. These sentences are then compared to produce a set of scores. These scores/features are then passed to a linear regression machine learning algorithm in order to build a model.
+
+= TOOLS USED =
+
+[Please keep those tools that you used, delete those you did not use, and add more lines if needed]
+
+* Word Sense Disambiguation
+* Knowledge-based similarity
+* Stemming 
+* Synonym substitution
+* Machine Learning - Linear Regression 
+* Ngram
+
+= RESOURCES USED =
+
+[Please keep those resources that you used, delete those you did not use, and add more lines if needed]
+
+* WordNet
+
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+[Please summarize the method to combine the tools and resources, mentioning whether it's heuristic, or uses machine learning, etc.]
+We use machine learning techniques to combine ngram comparison vectors for each sentence pair. We pass in the gold standard in order to train the model and then used cross-fold validation to validate the model.
+
+= COMMENTS =
+
+[Please include any comment you might have to improve the task in the future]

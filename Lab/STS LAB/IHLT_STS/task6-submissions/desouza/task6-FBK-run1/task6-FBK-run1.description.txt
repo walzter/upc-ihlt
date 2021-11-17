@@ -1,0 +1,48 @@
+========================
+
+= TEAM =
+
+Fondazione Bruno Kessler _ José Guilherme C. de Souza
+
+= DESCRIPTION OF RUN =
+
+This run is a combination of several different tools and resources to find the
+equivalence between two sentences: machine translation evaluation scores at the
+lexical level, shallow parsing, deep parsing, shallow semantics, discourse
+relations, word distributional similarity and word knowledge-based similarity.
+
+= TOOLS USED =
+
+[Please keep those tools that you used, delete those you did not use, and add more lines if needed]
+
+* Part of speech tagger
+* Syntax parser
+* Semantic Role Labeling
+* Lexical Substitution
+* Distributional similarity
+* Knowledge-based similarity
+* Named Entity recognition
+* Logical Inference
+* Shallow Parser
+* Dependency Parser
+* Stemmer
+
+= RESOURCES USED =
+
+[Please keep those resources that you used, delete those you did not use, and add more lines if needed]
+
+* Monolingual corpora
+* Tables of paraphrases
+* WordNet
+* Repositories for named-entities and acronyms
+* Wikipedia
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+Machine learning approach to combine the tools and resources. The SVMLight
+toolkit was used (SVM RBF kernel, default parameters).
+
+
+= COMMENTS =
+
+[Please include any comment you might have to improve the task in the future]

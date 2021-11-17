@@ -1,0 +1,44 @@
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+UMCC_DLSI
+University of Matanzas. Cuba
+University of Alicante. Spain
+Antonio Fernández Orquín
+
+= DESCRIPTION OF RUN =
+In this run has been applied a machine learning system based on voting classifier composed by the following techniques: Bagging (using M5P), Bagging (using REPTree), Random SubSpace (using REPTree) and MP5. Several features, considering both phrases, were extracted and they show up from now on: Similarity Measures, Semantic Measure, SentiWordNet Polarity Matches, Lexical-semantic alignment. Also, several resources were used like: Freeling, WordNet, WordNet Domains, WordNet Affect, SUMO, Semantic Classes and SentiWordNet.
+
+= TOOLS USED =
+* Part of speech tagger
+* Lemmatizer
+* Knowledge-based similarity
+* Sentiment Analysis
+* Lexical Distances (edit based and token based) and Similarity Measures
+* Lexical-Semantic Alignment
+
+= RESOURCES USED =
+* Monolingual corpora
+* ISR-WN (WordNet, WordNet Domains, WordNet Affect, SentiWordNet, SUMO, Semantic Classes) 
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+Our main method use Freeling tool as pos-tagger. We only need from Freeling the lemmas and the grammatical category for this lemma. Also we used the most frequent senses (using cnlist file from WordNet 1.7). After that, several edit distances and similarity measures have been taken into account as features on machine learning system (in concrete using Weka tool). To extract semantic features from de sentences we use ISR-WN resource. In this resource all word senses are linked to several concepts and sentimental polarities (only those with emotional characteristics).
+
+Description of the features using in the machine learning system:
+- String based similarity measures: Needleman-Wunch (sequence alignment), Smith-Waterman (sequence alignment), Jaro, Jaro-Winkler, Chapman-Mean-Length, QGram-Distance, Block-Distance, Jaccard Similarity, Monge-Elkan and Overlap-Coefficient. These algorithms have been obtained from SourceForge Web Site (http://sourceforge.net/projects/simmetrics/). Also, we used others modification of classical edit distances, for example: an adaptation of Levenshtein Edit Distance (LED) with two variants: normalized and not normalized (the first, is the distance among sentences using LED, comparing morphologic similarity between words and the other is the distance among sentences using LED, but calculating words similarity also with LED, values above a decision threshold (experimentally 2) mean unequal words). Finally, the last distance is an extension of Levenshtein distance named Extended Distance (EDx) (see http://rua.ua.es/dspace/handle/10045/18329 for details).
+- Minimal semantic distances (Breadth First Search (BFS)) obtained between the most relevant concepts of both sentences. Relevant concepts that pertains to semantic resources from ISR-WN, as WordNet, WordNet Affect, SUMO and Semantic Classes (concepts obtained after having applied the Association Ratio (AR) measure between concepts and words over each sentence).
+- A value indicating SentiWordNet Polarities matches of the analyzed sentences. This analysis has been applied from several dimensions (WordNet, WordNet Domains, WordNet Affect, SUMO and Semantic Classes), where the words with sentimental polarity offer to the relevant concepts (for each conceptual resource from ISR-WN (e.g. WordNet, WordNet Domains, WordNet Affect, SUMO and Semantic Classes)) its polarity values. Other analysis were the integration of all results of polarity in a measure, and further a voting process where all polarities output are involved.
+- We used an alignment method that attempts to align lemmas and also grammatical categories (obtained with Freeling) from both sentences. Those words that were not aligned, we attempt to align by its WordNet semantic relation (synonymy, hyponymy, hyperonymy, derivationally-related-form, similar-to, verbal group, entailment and cause relation). At last, we get the final aligned value as FAV= NAW/NWSP. Where FAV is the final aligned value, NAW is the number of aligned word and NWSP is the number of words of the shorter phrases.
+
+Finally, all these features were introduced on machine learning system using a voting classifier composed by the following techniques: Bagging (using M5P), Bagging (using REPTree), Random SubSpace (using REPTree) and MP5. The training corpus has been provided by Semeval-2012 competition, in concrete by Semantic Textual Similarity task. As a result, we get a trained model capable to estimate the similarity value between two phrases.
+
+= COMMENTS =
+

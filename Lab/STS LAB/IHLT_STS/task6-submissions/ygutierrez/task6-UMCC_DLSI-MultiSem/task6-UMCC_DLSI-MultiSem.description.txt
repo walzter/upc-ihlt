@@ -1,0 +1,42 @@
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+UMCC_DLSI
+University of Matanzas. Cuba
+University of Alicante. Spain
+Yoan Gutiérrez Vázquez
+
+= DESCRIPTION OF RUN =
+In this run has been applied a machine learning system based on voting classifier composed by the following techniques: Bagging (using M5P), Bagging (using REPTree), Random SubSpace (using REPTree) and MP5. Several features, considering both phrases, were extracted and they show up from now on: Semantic Measure, token based Edit Distance and Sentence Alignment. Also, several resources were used like: Freeling, WordNet, WordNet Domains, WordNet Affect, SUMO and Semantic Classes.
+
+= TOOLS USED =
+
+* Part of speech tagger
+* Lemmatizer
+* Word Sense Disambiguation
+* Knowledge-based similarity
+* Lexical Distances (token based) 
+
+= RESOURCES USED =
+* Monolingual corpora
+* ISR-WN (WordNet, WordNet Domains, WordNet Affect, SUMO, Semantic Classes) 
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+Our main method use Freeling tool as pos-tagger. We only need from Freeling the lemmas and the grammatical category for this lemma. Also we used the most frequent senses (using cnlist file from WordNet 1.7). After that, several edit distances and similarity measures have been taken into account as features on machine learning system (in concrete using Weka tool). To extract semantic features from de sentences we use ISR-WN resource. In this resource all word senses are linked to several concepts and sentimental polarities (only those with emotional characteristics).
+
+Description of the features using in the machine learning system:
+- QGram-Distance. These algorithms have been obtained from SourceForge Web Site (http://sourceforge.net/projects/simmetrics/). 
+- Semantic measures between all part-of-speech, only nouns, only verbs, only adjectives and only adverbs from each sentences pair. For that, we used the most frequency senses from each element of these sets, and then the Hungarian algorithm is applied. It permits to obtain the minimal cost to transform a nodes set (S1) from a graph (ISR-WN) into another nodes set (S2). Others features utilized over each part-of-speech and all joined are number of perfectly matches between words, quantity of words from the shortest sentence and the quantity of these that do not match (e.g. unequal word or not aligned words using Hungarian algorithm). It is important to remark that always S1 is taken from the shortest sentence.
+
+Finally, all these features were introduced on machine learning system using a voting classifier composed by the following techniques: Bagging (using M5P), Bagging (using REPTree), Random SubSpace (using REPTree) and MP5. The training corpus has been provided by Semeval-2012 competition, in concrete by Semantic Textual Similarity task. As a result, we get a trained model capable to estimate the similarity value between two phrases.
+
+= COMMENTS =
+

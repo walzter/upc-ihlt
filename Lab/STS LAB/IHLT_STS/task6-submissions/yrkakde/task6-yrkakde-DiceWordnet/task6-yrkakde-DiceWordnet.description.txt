@@ -1,0 +1,34 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+
+Yogesh Kakde
+Indian Institute of Technology, Bombay
+
+= DESCRIPTION OF RUN =
+We create a vocabulary for pair of sentences. We combine words which have synonym, derivative, hyponym and meronym relationship in wordnet. A vector of 0/1 (depending on term presence and absence in vocabulary) is formed for both the sentences. Dice Similarity is calcualted for these two sentences. Dice score is between 0 and 1 so we multiply the score by 5. 
+
+
+= TOOLS USED =
+
+* Lemmatizer
+* Distributional similarity
+
+= RESOURCES USED =
+
+* WordNet
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+Only wordnet is used to find the relation between two terms. No heuristic or machine learning technique is used in this method.
+
+= COMMENTS =

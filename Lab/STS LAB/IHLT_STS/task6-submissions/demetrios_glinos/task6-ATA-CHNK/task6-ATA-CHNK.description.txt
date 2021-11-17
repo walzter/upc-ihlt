@@ -1,0 +1,46 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+
+Team name: ATA
+First Author: Demetrios G. Glinos, Advanced Text Analytics, LLC
+
+= DESCRIPTION OF RUN =
+
+The method used is as follows: Sentences are first POS-tagged and chunked.  Features are extracted from the chunked output and used as input to a similarity classifier trained on the same features extracted from all three training data sets. Each output file for this run contains only chunk-based classifications.  
+
+= TOOLS USED =
+
+[Please keep those tools that you used, delete those you did not use, and add more lines if needed]
+
+* Part of speech tagger
+* Chunker
+* Dependency parser
+* Semantic Role Labeling
+* Distributional similarity
+* Knowledge-based similarity
+
+= RESOURCES USED =
+
+[Please keep those resources that you used, delete those you did not use, and add more lines if needed]
+
+* WordNet
+* U.S. National Library of Medicine Lexical Tools
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+WordNet synonyms and hypernyms are used to determine the similarity and relation among terms in the sentences. The NLM lexical tools are used to normalize phrases to generate the base words for comparison.
+
+= COMMENTS =
+
+[Please include any comment you might have to improve the task in the future]
+

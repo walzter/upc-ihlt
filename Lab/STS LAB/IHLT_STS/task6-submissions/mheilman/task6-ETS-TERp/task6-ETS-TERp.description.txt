@@ -1,0 +1,30 @@
+========================
+
+= TEAM =
+
+Michael Heilman and Nitin Madnani
+Educational Testing Service
+
+= DESCRIPTION OF RUN =
+
+For this submission, we used the TERp system from Snover, Madnani, Dorr, and Schwartz (WSMT 2009).  We simply used the default terpa.param parameter settings for the feature weights, rather than retraining.  We include this run for comparison with our other runs with the PERP system, which extends TERp in various ways.
+
+= TOOLS USED =
+
+* Lemmatizer (Porter stemmer)
+* Lexical Substitution
+* Knowledge-based similarity
+* Pivot-based paraphrase database
+
+= RESOURCES USED =
+
+* Monolingual corpora (Gigaword NYT stories for word frequencies)
+* Multilingual corpora (GALE Chinese corpora for extracting the pivot-based paraphrase database)
+* WordNet
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+The TERp system (Snover et al., 2009) is a machine translation metric that models sentence pairs as sets of weighted edits (e.g., insertion, deletion, phrasal paraphrase).  We refer the reader to existing paper about TERp.
+
+= COMMENTS =
+

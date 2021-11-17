@@ -1,0 +1,50 @@
+========================
+
+= TEAM =
+
+TakeLab
+Faculty of Electrical Engineering and Computing, University of Zagreb
+Jan Šnajder
+http://takelab.fer.hr/
+
+= DESCRIPTION OF RUN =
+
+Simple features such as bigram and trigram overlap, overlap of numbers,
+length difference, etc., were computed using lowercased and lemmatized words
+(separately). We have also computed LSA of Wikipedia and NYTimes corpus and
+we have used the obtained vectors to implement a few more similarity
+measures. Additionaly, word information content (-log(pword), where pword is
+computed from a larger corpus) was used in some features to weight either (a)
+ngram matches or (b) word vectors.
+
+= TOOLS USED =
+
+* Part of speech tagger
+* Lemmatizer
+* Lexical Substitution
+* Distributional similarity
+* Knowledge-based similarity
+* LIBSVM
+* ARPACK
+
+= RESOURCES USED =
+
+* Short stopword list
+* Monolingual corpora
+  * NYTimes
+* WordNet
+* Other dictionaries
+  * Google Books Ngrams
+  * BNC (only for wordnet - information content)
+* Wikipedia
+* Other distributional similarity thesauri
+    * distributional similarity generated from Wikipedia
+    * distributional similarity generated from NYTimes corpus
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+All features were combined using support vector regression using LIBSVM.
+
+= COMMENTS =
+
+Sometimes the provided scores were rather surprising. The test data was also somewhat surprising - there were multiple instances of same sentence pairs in SMTeuroparl.

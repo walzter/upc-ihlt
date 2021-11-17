@@ -1,0 +1,61 @@
+========================
+
+= TEAM =
+
+SRI, Eric Yeh (yeh@ai.sri.com)
+UBC, Eneko Agiree (e.agirre@ehu.es)
+
+= DESCRIPTION OF RUN =
+
+This run builds off of the techniques in run 2 and run 1.  Here, we trained three regressors (Support Vector Regressors with RBF kernels), one for each training set (MSRpar, MSRvid, SMTeuroparl).  We then trained a multinomial logistic regression classifier to classify whether an input instance belonged to one of the three datasets.  Features were drawn from system 2.  In five fold cross validation experiments we found the overall accuracy to be relatively good.  The combined confusion (over 5 runs) was,
+
+Acc = 0.9176, baseline = 0.3357, total=2234.0
+, confusion (rows = guess, cols=gold)=guess/gold
+                  	L1	L2	L3	MARG
+L1 MSRpar         	664.0	7.0	75.0	746.0
+L2 MSRvid         	7.0	737.0	10.0	754.0
+L3 SMTeuroparl    	79.0	6.0	649.0	734.0
+MARG              	750.0	750.0	734.0
+
+MSRpar	F1=0.8877 , prec=0.8901  (664.0/746.0), recall=0.8853  (664.0/750.0)
+MSRvid	F1=0.9801 , prec=0.9775  (737.0/754.0), recall=0.9827  (737.0/750.0)
+SMTeuroparl	F1=0.8842 , prec=0.8842  (649.0/734.0), recall=0.8842  (649.0/734.0)
+
+For each dataset, we did the following for each instance,
+- For an instance, identify which training set likely best models it, using the classifier.
+- Use the regression model trained specifically on that dataset to score the instance.
+
+Run 2 incorporated the following:
+- Skip bigrams in BLEU form, per the ROUGE-S measure in Lin (2004).  The skip bigrams were placed in BLEU form, in order to measure pairwise precision.  Skip bigrams of up to distance 5 were employed.
+- Skip bigram POS vector features for sentences with ten or less tokens, with a maximum distance of 3.
+
+Run 1 incorporated the following:
+- Several semantic similarity methods, based on different resource types and pooled using a Semantic Matrix (Fernando and Stevenson 2008).  The underlying resources include the WordNet Lin, WuP, and LCH WordNet similarity measures, the Lin thesaurus, and ESA over Wikipedia.  
+- String edit (Levenshtein) distances, using the Semantic Matrix for pooling.
+- Cosine overlap over lemmas.
+- Soft BLEU score up to order 4 over lemmas.
+- POS vector features, per Finch et al. (2005)
+- Linear combinations of the above.
+
+These were regressed using the LibSVM Support Vector Regression, with a CV tuned gamma of 1.0, using a radial basis kernel.
+
+= TOOLS USED =
+
+- Part of speech tagger
+- Lemmatizer
+- Distributional similarity
+- Knowledge-based similarity
+
+= RESOURCES USED =
+
+- WordNet
+- Wikipedia
+- Lin's thesaurus
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+Per the description, resource based methods (WordNet measures, Wikipedia, Lin's thesaurus) were pooled using Semantic Matrices to arrive at a number.  These, along with the POS vector features, were encoded as vectors and fed to the LibSVM Support Vector Regression package.
+
+= COMMENTS =
+
+

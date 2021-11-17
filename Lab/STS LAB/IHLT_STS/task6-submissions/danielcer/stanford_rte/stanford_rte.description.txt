@@ -1,0 +1,52 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+
+Stanford NLP. Daniel Cer
+
+= DESCRIPTION OF RUN =
+
+We retrained the Stanford RTE system to produce STS scores. This is similar to what was described in the article given below, in which our RTE system was retrained to do machine translation evaluation:
+
+Measuring Machine Translation Quality as Semantic Equivalence: A Metric Based on Entailment Features
+Sebastian Padó, Daniel Cer, Michel Galley, Dan Jurafsky, Christopher D. Manning.
+Machine Translation. Nov 2009  
+
+The approach can be summarized as follows: The Stanford RTE system is run in both directions over the two sentences being evalutated. Features are extracted during each run that are then given to a downstream regression model that predicts the STS score for the sentence pair. To make the scores more robust on noisy ungrammatical input, we also provide the smooth-BLEU score for each sentence pair being evaluated to the regression model.  
+
+= TOOLS USED =
+
+[Please keep those tools that you used, delete those you did not use, and add more lines if needed]
+
+* Stanford RTE System
+  * Part of speech tagger
+  * Lemmatizer
+  * Multiword expressions recognition
+  * Syntax parser
+  * Infomap
+  * Stocastic sentence aligner
+  * and numerous other small components
+* libsvm - for regression modeling
+
+= RESOURCES USED =
+
+[Please keep those resources that you used, delete those you did not use, and add more lines if needed]
+
+* WordNet
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+The Stanford RTE system uses a pipelined approach to annotate, align, and extract features for pairs of input sentences. The final features are used by a single SVM model to produce regression scores.
+
+= COMMENTS =
+
+This manner of using the RTE system was originally designed for machine translation evaluation.

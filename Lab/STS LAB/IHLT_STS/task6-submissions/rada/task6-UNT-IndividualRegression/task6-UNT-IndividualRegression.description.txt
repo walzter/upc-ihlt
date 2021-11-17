@@ -1,0 +1,44 @@
+========================
+
+= TEAM =
+
+UNT - University of North Texas, Carmen Banea et al.
+
+= DESCRIPTION OF RUN =
+
+We trained regression algorithms (SMOReg with Puk kernel) individually on the 3 known datasets and tested on the corresponding set. Then we combined all train sets into one and tested individually on the surprise test sets.
+
+= TOOLS USED =
+
+* Lemmatizer
+* Word Sense Disambiguation
+* Bipartite Graph Matching
+* Distributional similarity
+** Bag of Words (BOW)
+** TF.IDF
+** Explicit Semantic Analysis (ESA)
+** Latent Semantic Analysis (LSA)
+** Salient Semantic Analysis (SSA)
+* Knowledge-based similarity
+** Jiang and Conrath
+** Leacock and Chodorow
+** Lesk
+** Resnik
+** Lin
+** Path
+** Wu and Palmer 
+* Machine Learning
+
+= RESOURCES USED =
+
+* WordNet
+* Wikipedia
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+We combined the individual scores obtained using the resources and tools mentioned above, and generated one vector per sample (both for the train and the test datasets provided by the organizers). We then trained SVM regression algorithms. For the known datasets, we trained and tested on the corresponding sets. For the surprise datasets, we combined all the training sets and tested individually for each unknown set.
+
+
+= COMMENTS =
+
+None.

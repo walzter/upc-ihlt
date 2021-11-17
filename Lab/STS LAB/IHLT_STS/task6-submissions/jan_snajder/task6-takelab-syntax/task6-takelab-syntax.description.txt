@@ -1,0 +1,36 @@
+= TEAM =
+TakeLab
+Faculty of Electrical Engineering and Computing, University of Zagreb
+Jan Šnajder
+http://takelab.fer.hr/
+
+= DESCRIPTION OF RUN =
+Run 2: Lexical semantics + syntax + NERC
+
+This run was performed using dictionary based lexical semantics features, distributional lexical semantics features, syntax overlap features and named entity overlap features.
+SVM (libSVM) was used for training and predicting.   
+
+= TOOLS USED =
+
+* Part of speech tagger
+* Lemmatizer
+* Stemmer
+* Syntax parser
+* Lexical Substitution
+* Distributional similarity
+* Knowledge-based similarity
+* Named Entity recognition
+
+= RESOURCES USED =
+
+* Monolingual corpora
+* WordNet
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+Supervised machine learning, support vector machines. The libSVM library was used.
+
+= COMMENTS =
+
+Not sure if the typos were intentional, but the labels in the gold sets were not reflecting them (i.e., people would recognize a typo and ignore it when assessing the similarity).
+We don't think this kind of task should include spelling correction, instead the teams should focus on similarity itself. 

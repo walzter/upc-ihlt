@@ -1,0 +1,39 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+
+Yogesh Kakde
+Indian Institute of Technology, Bombay
+
+= DESCRIPTION OF RUN =
+
+A vocabulary of each pair of sentences is developed. We combine words which have synonym, derivative, hyponym and meronym relationship in wordnet.  Wikipedia is used to get additional terms. Only the terms present in second sentence is added to first and vice versa. A vector of 0/1 (depending on term presence and absence in vocabulary) is formed for both the sentences. Cosine Similarity is calculated between the two vectors. Difference in numbers is penalized.  
+
+= TOOLS USED =
+
+* Lemmatizer
+* Distributional similarity
+* Named Entity recognition
+
+= RESOURCES USED =
+
+* WordNet
+* Wikipedia
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+[Please summarize the method to combine the tools and resources, mentioning whether it's heuristic, or uses machine learning, etc.]
+
+
+= COMMENTS =
+
+[Please include any comment you might have to improve the task in the future]

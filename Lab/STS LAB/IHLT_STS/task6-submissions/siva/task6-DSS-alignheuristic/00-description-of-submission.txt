@@ -1,0 +1,51 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+
+Diana McCarthy Saarland University (visiting)
+team name  DSS
+
+= DESCRIPTION OF RUN =
+
+Heuristic method which uses nouns, verbs, adjectives adverbs and numbers (identified by treetagger). Aligns words, or lemmas from left to right for both s1 given s2 and vice versa. If there is no alignment for words or lemmas then it does the same matching process (s1 given s2 and vice versa)  for distributionally similar neighbours using a thesaurus constructed using log-dice and UkWaC and also  another matching process looking for a corresponding grammatical relation (identified with malt parser) in the other sentence where the head/arg  has a match in both sentences. 
+
+= TOOLS USED =
+
+* Part of speech tagger
+* Lemmatizer
+* Syntax parser
+* Distributional similarity
+
+
+= RESOURCES USED =
+
+
+* Other distributional similarity thesauri (ukWaC thesaurus in Sketch Engine)
+
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+ The heuristic based algorithm
+1) retains nouns, verbs (not be) adjectives adverbs and numbers, to sentences of remaining tokens S1 and S2  
+2)matches words first and then lemmas, left to right,  S1 to S2 and vice versa
+3) Then for all tokens not matched it tries:
+i) matching with a distributional thesaurus - again left to right,  S1 to S2 and vice versa
+ii) matching head-arg relations using malt parser looking for a corresponding relation in both sentences where one word (arg or head) is unmatched in both whereas the head or arg is already matched at step 2
+4) checks matches at 2) and 3ii) are reciprocated
+5) score = sum(aligned words from step 2 in S1 and S2) + 0.4*sum (aligned at 3i) + 0.4*sum(aligned at 3ii) / |S1| + |S2|
+
+
+
+= COMMENTS =
+
+I gave comments at the STS workshop. Sorry but we are running a bit late ;)
+I would love a task where as well as a similarity on the two sentences, subparts are aligned with a score, and a relation e.g. entailment, equivalence, != on that alignment. This is obviously "future work". Thanks for all the organisation

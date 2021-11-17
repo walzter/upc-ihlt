@@ -1,0 +1,42 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+Diana McCarthy, Saarland University, (visiting)
+Spandana Gella, University of Malta, Malta
+Siva Reddy, Lexical Computing Ltd, UK
+team name  DSS
+
+= DESCRIPTION OF RUN =
+
+Sentence similarity scores from both the methods, alignheuristic and wordsim, are averaged to get a final score.
+
+= TOOLS USED =
+
+* Part of speech tagger
+* Lemmatizer
+* Syntactic Parser
+* Distributional similarity
+
+
+= RESOURCES USED =
+
+* Other distributional similarity thesauri (ukWaC thesaurus in Sketch Engine)
+
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+1) sim1= Similarity score for a sentence pair from the method alignheuristic (task6-DSS-alignheuristic)
+2) sim2= Similarity score for a sentence pair from the method wordsim (task6-DSS-wordsim)
+3. final score= (sim1 + sim2)/2
+
+= COMMENTS =
+

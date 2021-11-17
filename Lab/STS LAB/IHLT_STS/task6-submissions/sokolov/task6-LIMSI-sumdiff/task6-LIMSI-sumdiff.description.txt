@@ -1,0 +1,51 @@
+========================
+
+= TEAM =
+
+LIMSI-CNRS
+Artem Sokolov
+
+= DESCRIPTION OF RUN =
+
+A non-linear variant of the symmetrized similarity between context vectors.
+For each pairs of vectors one vector was produced of the same dimension that does not depend on the order of the arguments:
+$v = (x_1 + x_2, sign(x^1_1 - x^1_2) * (x_1 - x_2))$
+
+= TOOLS USED =
+
+* Stemmer
+* Distributional similarity
+* Machine Learning: Ranking by Boosting, Gradient Boosting
+
+= RESOURCES USED =
+
+* Monolingual corpora: GigaWord
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+Sparse context vectors were constructed in the same manner and with the same parameters as for the "cosprod"-run.
+The difference from the cosprod run is in way symmetry was induced in vectors for learning.
+
+We learned a symmetrical similarity function:
+\[
+sim(v) = \sum_i H^i(v^i),
+\]
+where $H^i$ are non-linear functions that minimize the pair-wise ranking loss on the training data set and 
+$v = (x_1 + x_2, sign(x^1_1 - x^1_2) * (x_1 - x_2))$.
+
+The pair-wise loss is defined as:
+\[
+L = \sum_{(s_1,s_2,s'_1,s'_2): t(s_1,s_2) > t(s'_1,s'_2)} D(s_1,s_2,s'_1,s'_2) [cos'(v(s'_1),v(s'_2)) > cos'(v(s_1),v(s_2))],
+\]
+where $(s_1,s_2)$ and $(s'_1,s'_2)$ are a two pairs of sentences from the training set.
+The sum runs over sentence pairs such that the first pair is ranked higher than the second.
+The weighting multiplier $D$ was set to be equal to a difference between averaged judges labels.
+
+The loss is non-convex and non-differentiable, so a convex upper bound to this non-convex loss 
+was optimized by a well-known boosting technique RankBoost (or AdaBoost for ranking).
+
+Number of boosting iterations and number of random directions were found by cross-validation on 5 folds.
+
+= COMMENTS =
+
+see cosprod-run

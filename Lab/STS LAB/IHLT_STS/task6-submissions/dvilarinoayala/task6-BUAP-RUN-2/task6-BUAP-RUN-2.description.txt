@@ -1,0 +1,23 @@
+========================
+= TEAM =
+
+BUAP, Benemérita Universidad Autónoma de Puebla.
+Darnes Vilariño Ayala
+
+= DESCRIPTION OF RUN =
+Use WordNet taxonomy for determinate sts degree
+
+= TOOLS USED =
+* none
+
+= RESOURCES USED =
+* WordNet
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+  Algorithm:
+    we implement the algorithm of Rada Mihalcea to obtain semantic textual similarity
+    measure. In order to calculate the similarity between two terms, we use similarity
+    metric measures given the depth of two concepts in the WordNet taxonomy.
+
+= COMMENTS =
+Representation of sentences using context vectors.

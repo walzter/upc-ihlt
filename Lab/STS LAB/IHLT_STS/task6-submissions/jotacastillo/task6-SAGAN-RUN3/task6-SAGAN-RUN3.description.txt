@@ -1,0 +1,42 @@
+
+Please include a description of your submission, following the format
+below. 
+
+Please don't modify lines starting with = unless instructed to do so.
+
+Please delete lines starting with [. All lines starting with [ will be
+ignored.
+
+========================
+
+= TEAM =
+
+Julio Castillo, National University of Cordoba, Argentina
+
+= DESCRIPTION OF RUN =
+
+This run is based on Sagan system which is a Textual Entailment engine. 
+Our approach is based on machine learning, and we used semantic features based on WordNet.
+
+= TOOLS USED =
+
+* Stemmer
+* Word Sense Disambiguation
+* Lexical Substitution
+* Normalizer 
+* Time and date resolution
+* Textual Entailment
+
+= RESOURCES USED =
+
+* Monolingual corpora
+* WordNet
+* Acronyms DB
+
+= METHOD TO COMBINE TOOLS AND RESOURCES =
+
+Machine Learning - SVM with regression - 
+
+= COMMENTS =
+
+Very interesting task. More training data is needed.
