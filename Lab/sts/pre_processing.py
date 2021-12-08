@@ -14,10 +14,10 @@ from nltk.corpus import stopwords
 from nltk.corpus import wordnet
 from nltk.corpus import sentiwordnet
 from nltk.corpus import wordnet_ic
+nltk.download('stopwords')
 
-# here we will load the preprocessing utils 
-
-# removing the punctuation and stop-words 
+# defining the stopwords 
+stopwords = nltk.corpus.stopwords.words('english')
 
 #first we want to extract all the words in lowercase without any punctuation marks
 def strip_punctuation(sentence):
@@ -32,7 +32,7 @@ def strip_punctuation(sentence):
 
 # now we can remove the stopwords 
 
-def strip_stopwords(sentence):
+def strip_stopwords_punctuation(sentence):
     '''
     Function which removes the punctuations and the stopwords from the nltk.stopwords.words('english') taking it from the String library 
     
@@ -40,7 +40,7 @@ def strip_stopwords(sentence):
     Output:type: list(str)
     
     '''
-    return [x for x in nltk.word_tokenize(sentence) if x not in string.punctuation and x not in stopwords.words('english')]
+    return [x for x in nltk.word_tokenize(sentence) if x not in string.punctuation and x not in stopwords]
 
 
 # POS-TAG Converter
@@ -61,7 +61,19 @@ def penn2morphy(penntag, returnNone=False):
         return None if returnNone else ''
     
     
-def lemmatize(POS_TAG):
+# POS TAGGING
+    
+def get_pos_tag(tokenized_sentence):
+    '''
+    Function which given a tokenized sentence will return the corresponding POS tag 
+    
+    input:type: list(tokenized words )
+    output:type: list (tuple (str, str)) -> list(tuple (token, POS-TAG))
+    
+    '''
+    return nltk.pos_tag(tokenized_sentence)
+    
+def get_lemmas(POS_TAG):
     '''
     Function which "lemmatizes" the word with a given POS_tag
     
@@ -69,11 +81,28 @@ def lemmatize(POS_TAG):
     output:type: list of lemmas
     
     '''
+    list_of_lemmas = []
     wnl = WordNetLemmatizer()
-    for tags in POS_TAG:
-        morphed_tag = penn2morphy(tags[1]).lower()
+    for token_pos_pair in POS_TAG:
+        morphed_tag = penn2morphy(token_pos_pair[1]).lower()
         if morphed_tag in {'n','v','r','a'}:
-            return wnl(tags[0],pos=morphed_tag)
+            list_of_lemmas.append(wnl.lemmatize(token_pos_pair[0],pos=morphed_tag))
         else:
-            return tags[0]
+            list_of_lemmas.append(token_pos_pair[0])
+    return list_of_lemmas
+
+
+def clean_replace_unwanted_chars(tokenized_sentence_list):
+    '''
+    Function which removes any unwanted characters from the tokens:
+    - apostrophes when possessive is shown (Peter's) or (Peters')
+    
+    input:type:list (tokenized sentence)
+    output:type:list (cleaned tokenized sentence)
+    
+    '''
+    for idx, token in enumerate(tokenized_sentence_list):
+        ctoken = token.translate(str.maketrans('','',string.punctuation))
+        tokenized_sentence_list[idx] = ctoken
+    return tokenized_sentence_list
         
