@@ -106,3 +106,43 @@ def clean_replace_unwanted_chars(tokenized_sentence_list):
         tokenized_sentence_list[idx] = ctoken
     return tokenized_sentence_list
         
+
+def get_tfidf(list_of_sentences):
+    '''
+    Function which returns the term-frequency inverse-data-frequency in a given corpus 
+    The corpus her is a list of all the sentences. 
+    Mainly, the higher frequencies have less meaning, and the less frequent are more important because they can transmit more information. 
+    
+    input:type: list
+    output:type: dict
+    
+    '''
+    
+    def get_tf(list_of_sentences):
+        # initiatie a new frequency distribution
+
+        frequency_distribution = FreqDist()
+        total_freq = 0
+        
+        for sentence in list_of_sentences:
+            all_words = strip_stopwords_punctuation(sentence)
+            
+            for word in all_words:
+                # Sum 1 to the freq of the word 
+                frequency_distribution[word.lower()] += 1
+                
+                # Sum 1 to the total nb of words
+                total_freq += 1
+        return frequency_distribution, total_freq
+    
+    def get_idf(freq_dist, total_frequency):
+        # get the inverse document frequency in order to "normalize" the data 
+        idf = dict()
+        for key in freq_dist.keys():
+            idf[key] = np.log((total_frequency / freq_dist[key]))
+        return idf
+    
+    
+    frequency_distribution, total_freq = get_tf(list_of_sentences)
+    tfidf = get_idf(frequency_distribution, total_freq)
+    return tfidf
