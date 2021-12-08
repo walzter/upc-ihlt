@@ -2,7 +2,7 @@
 import glob
 import pandas as pd
 
-def LoadGS(PATH):
+def load_gs(PATH):
     '''
     Function which given a PATH will read the files and load the golden standard (gs) into a pandas 
     DataFrame for easier manipulation of the data. 
@@ -28,7 +28,7 @@ def LoadGS(PATH):
     
     return df
 
-def LoadSentences(PATH):
+def load_sentences(PATH):
     '''
     Function which given a PATH will read the files and load the sentence pairs into a pandas 
     DataFrame for easier manipulation of the data. 
