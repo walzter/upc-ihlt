@@ -41,3 +41,39 @@ def strip_stopwords(sentence):
     
     '''
     return [x for x in nltk.word_tokenize(sentence) if x not in string.punctuation and x not in stopwords.words('english')]
+
+
+# POS-TAG Converter
+# Mapping of Stanford POS-tag to WordNet type
+
+def penn2morphy(penntag, returnNone=False):
+    '''
+    Function which converts the Stanford POS-tag to the corresponding Wordnet one
+    input:type: str
+    output:type: str 
+    
+    '''
+    morphy_tag = {'NN':wordnet.NOUN, 'JJ':wordnet.ADJ,
+                  'VB':wordnet.VERB, 'RB':wordnet.ADV}
+    try:
+        return morphy_tag[penntag[:2]]
+    except:
+        return None if returnNone else ''
+    
+    
+def lemmatize(POS_TAG):
+    '''
+    Function which "lemmatizes" the word with a given POS_tag
+    
+    input:type: tuple (word, POS-Tag)
+    output:type: list of lemmas
+    
+    '''
+    wnl = WordNetLemmatizer()
+    for tags in POS_TAG:
+        morphed_tag = penn2morphy(tags[1]).lower()
+        if morphed_tag in {'n','v','r','a'}:
+            return wnl(tags[0],pos=morphed_tag)
+        else:
+            return tags[0]
+        
