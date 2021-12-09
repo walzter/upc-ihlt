@@ -36,7 +36,6 @@ def jd_fuzz_lev(SENTENCE_A, SENTENCE_B, X_TRAIN):
 
     '''
 
-
     # creating a copy 
     X_features = X_TRAIN.copy()
     #dropping one of the columns 
@@ -65,4 +64,5 @@ def jd_fuzz_lev(SENTENCE_A, SENTENCE_B, X_TRAIN):
     #dropping one of the columns 
     X_features = X_features.drop('SentB',axis=1)
     return X_features
+    
     

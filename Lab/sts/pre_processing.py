@@ -4,7 +4,6 @@ import numpy as np
 import string, nltk
 from nltk import pos_tag, word_tokenize, pos_tag, ne_chunk
 from nltk.stem import WordNetLemmatizer
-from nltk.metrics import jaccard_distance
 from nltk.probability import FreqDist
 from nltk.collocations import BigramCollocationFinder
 from nltk.collocations import TrigramCollocationFinder
