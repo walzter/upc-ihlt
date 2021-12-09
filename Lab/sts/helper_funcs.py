@@ -439,17 +439,17 @@ def extract_features(DATASET,scaled=None):
     input:type: pandas.DataFrame
     output:type: pandas.DataFrame    
     '''
-    SA, SB = get_processed_sentences(DATASET)
+    SAK, SBK = get_processed_sentences(DATASET)
     # Jaccard_Fuzzy_Lev
-    feature_df = jd_fuzz_lev(SA, SB, DATASET)
+    feature_df = jd_fuzz_lev(SAK, SBK, DATASET)
     #unigram, bigram and trigram features
-    ngram_features = get_ngram_features(SA,SB)
+    ngram_features = get_ngram_features(SAK, SBK)
     #features related to the length
-    length_features = get_length_features(SA,SB)
+    length_features = get_length_features(SAK, SBK)
     #similarity measurements 
-    synset_sim_feat = get_similarity_measure_dict(SA, SB)
+    #synset_sim_feat = get_similarity_measure_dict(SAK, SBK)
     # combining all the features 
-    FINAL_DATASET = pd.concat([feature_df,ngram_features, length_features,synset_sim_feat],axis=1)
+    FINAL_DATASET = pd.concat([feature_df,ngram_features, length_features],axis=1)
     
     if scaled == True:
         from sklearn.preprocessing import StandardScaler
