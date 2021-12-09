@@ -1,9 +1,8 @@
 #!/usr/bin/env/python3
 
-import string
-import nltk
-from nltk import pos_tag
-from nltk import word_tokenize, pos_tag, ne_chunk
+import numpy as np
+import string, nltk
+from nltk import pos_tag, word_tokenize, pos_tag, ne_chunk
 from nltk.stem import WordNetLemmatizer
 from nltk.metrics import jaccard_distance
 from nltk.probability import FreqDist
@@ -28,7 +27,7 @@ def strip_punctuation(sentence):
     Output:type: list(str)
     
     '''
-    return [x for x in nltk.word_tokenize(sentence) if x not in string.punctuation]
+    return [x for x in word_tokenize(sentence) if x not in string.punctuation]
 
 # now we can remove the stopwords 
 
@@ -40,7 +39,7 @@ def strip_stopwords_punctuation(sentence):
     Output:type: list(str)
     
     '''
-    return [x for x in nltk.word_tokenize(sentence) if x not in string.punctuation and x not in stopwords]
+    return [x for x in word_tokenize(sentence) if x not in string.punctuation and x not in stopwords]
 
 
 # POS-TAG Converter
@@ -71,7 +70,7 @@ def get_pos_tag(tokenized_sentence):
     output:type: list (tuple (str, str)) -> list(tuple (token, POS-TAG))
     
     '''
-    return nltk.pos_tag(tokenized_sentence)
+    return pos_tag(tokenized_sentence)
     
 def get_lemmas(POS_TAG):
     '''
@@ -125,7 +124,7 @@ def get_tfidf(list_of_sentences):
         total_freq = 0
         
         for sentence in list_of_sentences:
-            all_words = strip_stopwords_punctuation(sentence)
+            all_words = strip_punctuation(sentence)
             
             for word in all_words:
                 # Sum 1 to the freq of the word 
@@ -146,3 +145,59 @@ def get_tfidf(list_of_sentences):
     frequency_distribution, total_freq = get_tf(list_of_sentences)
     tfidf = get_idf(frequency_distribution, total_freq)
     return tfidf
+
+
+def get_bleu_score(list_of_sentences):
+    '''
+    Function which returns the BLEU score of a list of sentences S, where the hypothesis is S[idx] for S-1 references
+    
+    input:type: list(str)
+    output:type: list(float)
+    
+    '''
+    bleu_score = []
+    for idx, sentences in enumerate(list_of_sentences):
+        hypothesis = list_of_sentences[idx]
+        references = list_of_sentences[idx:]
+        try:
+            BLEU_SCORE = nltk.translate.bleu_score.sentence_bleu(references, hypothesis)
+        except Exception as e: 
+            BLEU_SCORE = 0
+            continue
+        bleu_score.append(BLEU_SCORE)
+        
+    return bleu_score
+
+
+def get_processed_sentences(TRAINING_DATAFRAME):
+    
+    '''
+    Function which creates a single dataframe for each sentence and then applies the preprocessing to it. 
+    
+    input:type: pandas.DataFrame
+    output:type: pandas.DataFrame
+    
+    
+    '''
+    
+    # sentence A 
+    SA = TRAINING_DATAFRAME.copy().drop('SentB',axis=1)
+    SA['SentA_nopunc'] = SA.SentA.apply(lambda x: strip_punctuation(x))
+    # removing stopwords
+    SA['SentA_nopunc_stop'] = SA.SentA.apply(lambda x: strip_stopwords_punctuation(x))
+    # getting the pos-tag
+    SA['SentA_pos'] = SA.SentA_nopunc_stop.apply(lambda x: get_pos_tag(x))
+    # getting the lemmas
+    SA['SentA_lemmas'] = SA.SentA_pos.apply(lambda x: get_lemmas(x))
+    
+    # Sentence B
+    SB = TRAINING_DATAFRAME.copy().drop('SentA',axis=1)
+    SB['SentB_nopunc'] = SB.SentB.apply(lambda x: strip_punctuation(x))
+    # removing stopwords
+    SB['SentB_nopunc_stop'] = SB.SentB.apply(lambda x: strip_stopwords_punctuation(x))
+    # getting the pos-tag
+    SB['SentB_pos'] = SB.SentB_nopunc_stop.apply(lambda x: get_pos_tag(x))
+    # getting the lemmas
+    SB['SentB_lemmas'] = SB.SentB_pos.apply(lambda x: get_lemmas(x))
+    
+    return SA, SB
