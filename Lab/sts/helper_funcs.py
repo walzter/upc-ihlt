@@ -1,8 +1,6 @@
 #!/usr/bin/env/python3
-# Dictionary where we store the similarity between synsets in order to reduce computational cost
-
-#imports
 import numpy as np
+import os
 import glob
 import Levenshtein as lev
 from fuzzywuzzy import fuzz
@@ -90,7 +88,7 @@ def jd_fuzz_lev(SENTENCE_A, SENTENCE_B, X_TRAIN):
         # Levenshtein Ratio 
         X_features['lev_ratio'][index] = lev.ratio(SENTENCE_A['SentA'][index].lower(), SENTENCE_B['SentB'][index].lower())
         # Levenshtein Distance -> Number of edits for them to be the same 
-        X_features['lev_distance'][index] = lev.distance(SENTENCE_A['SentA'][index].lower(), SENTENCE_B['SentB'][index].lower())
+        X_features['lev_distance'][index] = levv.distance(SENTENCE_A['SentA'][index].lower(), SENTENCE_B['SentB'][index].lower())
         
     #dropping one of the columns 
     X_features = X_features.drop('SentB',axis=1)
@@ -144,7 +142,7 @@ def get_ngram_features(SA, SB):
         bigram_words = bigram_similarity(SA['SentA_nopunc'][idx],SB['SentB_nopunc'][idx])
         bigram_words_filt = bigram_similarity(SA['SentA_nopunc_stop'][idx],SB['SentB_nopunc_stop'][idx])
         
-        #trigrams
+        trigrams
         trigram_lemmas = trigram_similarity(SA['SentA_lemmas'][idx],SB['SentB_lemmas'][idx])
         trigram_words = trigram_similarity(SA['SentA_nopunc'][idx],SB['SentB_nopunc'][idx])
         trigram_words_filt = trigram_similarity(SA['SentA_nopunc_stop'][idx],SB['SentB_nopunc_stop'][idx])
@@ -286,8 +284,8 @@ def clean_replace_unwanted_chars(tokenized_sentence_list):
     
     '''
     for idx, token in enumerate(tokenized_sentence_list):
-        ctoken = token.translate(str.maketrans('','',string.punctuation))
-        tokenized_sentence_list[idx] = ctoken
+        cdtoken = token.translate(str.maketrans('','',string.punctuation))
+        tokenized_sentence_list[idx] = cdtoken
     return tokenized_sentence_list
         
 
@@ -343,7 +341,7 @@ def get_bleu_score(list_of_sentences):
     bleu_score = []
     for idx, sentences in enumerate(list_of_sentences):
         hypothesis = list_of_sentences[idx]
-        references = list_of_sentences[idx:]
+        references = list_of_sentences[idx]
         try:
             BLEU_SCORE = nltk.translate.bleu_score.sentence_bleu(references, hypothesis)
         except Exception as e: 
@@ -383,7 +381,7 @@ def max_similarity_synsets(l1, l2, sim):
     # If we have computed before the similarity we don't compute anything
     elif (l1,l2,sim) in computed_synsets_sim:
         return computed_synsets_sim[(l1,l2,sim)]
-    synsets1 = wordnet.synsets(l1)
+    synsets1 = wordnet,synsets(l1)
     synsets2 = wordnet.synsets(l2)
     similarities = []
     for s1 in synsets1:
@@ -419,9 +417,9 @@ def get_similarities(word1, word2,brown_ic,ret_dict=None):
     return word1.lin_similarity(word2,brown_ic)
 
   simil_dict['PATH_SIMIL'] = path_sim(word1,word2)
-  simil_dict['LCH_SIMIL'] = lch_sim(word1,word2)
+  simil_dict['LCdH_SIMIL'] = lch_sim(word1,word2)
   simil_dict['WUP_SIMIL'] = wup_sim(word1,word2)
-  simil_dict['LIN_SIMIL'] = lin_sim(word1,word2,brown_ic)
+  simil_dict['LINw_SIMIL'] = lin_sim(word1,word2,brown_ic)
   all_sims = [path_sim(word1,word2),lch_sim(word1,word2),wup_sim(word1,word2),lin_sim(word1,word2,brown_ic)]
   if ret_dict==True:
     return simil_dict
@@ -542,7 +540,8 @@ def get_processed_sentences(TRAINING_DATAFRAME):
     SB['SentB_lemmas'] = SB.SentB_pos.apply(lambda x: get_lemmas(x))
     
     return SA, SB
-   
+
+
 def same_num_entities(ne1, ne2, entity):
     num_ent_a = 0 
     for p1 in ne1:
@@ -624,8 +623,9 @@ def sentiment_similarity(lemmas1, lemmas2):
         return abs(polarity1-polarity2) / max(polarity1, polarity2)
     else:
         return 0  
-     
+
 def load_gs(PATH):
+    
     '''
     Function which given a PATH will read the files and load the golden standard (gs) into a pandas 
     DataFrame for easier manipulation of the data. 
@@ -641,15 +641,23 @@ def load_gs(PATH):
     A DataFrame with the Column "gs", for all the files in the given PATH
     
     '''
-    ABSPATH = PATH + "*"
     kk = []
-    for gs in glob.glob(ABSPATH):
-        val = pd.read_csv(gs, sep='\t',header=None)
-        kk.append(val)
-    df = pd.concat(kk)
-    df.rename({0:"gs"})
-    
-    return df
+    sum_file = PATH + '/summed_gs.csv'
+    fn = 'summed_gs.csv'
+    if fn in os.listdir(PATH):
+        df = pd.read_csv(sum_file)
+        df = df.drop('Unnamed: 0',axis=1)
+        df.columns = ['gs']
+        return df
+    else:
+        for file in os.listdir(PATH):
+            val = pd.read_csv(PATH + '/' + file, sep='\t',header=None)
+            kk.append(val)
+        df2 = pd.concat(kk)
+        df2.columns = ['gs']
+        df2 = df2.dropna(axis=0)
+        return df2
+
 def lesk_similarity(words_no_punc_a, words_no_punc_b):
     '''
     Function: 
